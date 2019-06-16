@@ -6,6 +6,7 @@ import pandas as pd
 from tqdm import tqdm
 
 from keras.utils import to_categorical
+from sklearn.preprocessing import RobustScaler
 
 def get_files(file_path):
     file_list=glob.glob(os.path.join(file_path, '*.csv'))
@@ -63,6 +64,8 @@ def prepare_data_for_training(data_df, label_df, seq_len=3000):
                     temp_df=data_engineering(temp_df)
                     label_list.append(int(label_df[label_df['bookingID']==bookingID]['label']))
                     temp_df=temp_df.drop(['bookingID'], axis=1)
+                    scaler = RobustScaler()
+                    temp_df[['Accuracy', 'Bearing', 'Speed', "acceleration"]]=pd.DataFrame(data=scaler.fit_transform(temp_df[['Accuracy', 'Bearing', 'Speed', "acceleration"]]), columns=['Accuracy', 'Bearing', 'Speed', "acceleration"])
                     final_data.append(temp_df.values)
                     #yield np.asarray(final_data), to_categorical(label_list)
                     i=i+1
