@@ -46,4 +46,4 @@ The arguments do the following:
 - --data_folder: Path to the directory containing your data file
 - --label_folder: Path to the directory containing the labels for your data
 
-<img align="center" src="images/predictions.png" alt="Sample Testing Output" style="height:300px;"><br/>
+<img align="center" src="images/predictions.png" alt="Sample Testing Output" height="35"><br/>
